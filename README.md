@@ -1,4 +1,3 @@
-# express-typescript-starter
+# Node Google Drive API
 
-A simple starter structure that uses node, express, and typescript.
-
+A node api written with typescript that interacts with google drive.

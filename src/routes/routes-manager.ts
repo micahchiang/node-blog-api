@@ -1,13 +1,10 @@
 import * as express from 'express';
+import * as defaultRoutes from './default-routes';
+import * as driveRoutes from './drive-routes';
 
 let router = express.Router();
 
-router.get('/', (req, res) => {
-    res.send('hello world');
-});
-
-router.get('/api', (req,res) => {
-    res.send('accessing api');
-})
+router.use('/', defaultRoutes);
+router.use('/drive', driveRoutes);
 
 export = router;

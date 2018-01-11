@@ -1,3 +1,3 @@
 # Node Google Drive API
 
-A node api written with typescript that interacts with google drive.
+A node api written in typescript for basic blog functionality.

@@ -10,8 +10,8 @@ class App {
 
     constructor() {
         this.express = express();
+        this.loadMiddleware();
         this.loadRoutes();
-        this.loadMiddleware()
     }
 
     private loadRoutes() {

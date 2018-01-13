@@ -9,3 +9,5 @@ let BlogSchema = new Schema({
 });
 
 let BlogModel = mongoose.model('BlogModel', BlogSchema);
+
+export default BlogModel;

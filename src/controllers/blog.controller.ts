@@ -1,5 +1,15 @@
 import BlogModel from '../models/blog.model'
 
+export let getEntries = (req,res) => {
+    BlogModel.find({}, (err, entries) => {
+        if (err) {
+            console.log(`Error retrieving entries: ${err}`);
+            return;
+        }
+        res.json(entries);
+    })
+}
+
 export let addEntry = (req,res) => {
     const entry = new BlogModel({
         date: req.body.date,

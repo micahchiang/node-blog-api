@@ -11,6 +11,7 @@ export let getEntries = (req,res) => {
 }
 
 export let addEntry = (req,res) => {
+
     const entry = new BlogModel({
         date: req.body.date,
         title: req.body.title,

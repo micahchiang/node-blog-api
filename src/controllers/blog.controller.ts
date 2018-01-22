@@ -7,7 +7,7 @@ export let getEntries = (req,res) => {
             return;
         }
         res.json(entries);
-    })
+    });
 }
 
 export let addEntry = (req,res) => {
@@ -21,7 +21,7 @@ export let addEntry = (req,res) => {
     entry.save((err) => {
         if (err) {
             console.log(`Error saving to db: ${err}`);
-            return;
+            return
         }
         res.send('successfully saved to db');
     });

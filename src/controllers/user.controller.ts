@@ -14,7 +14,7 @@ export let getUser = (req, res) => {
         }
         return res.json(user);
     });
-}
+};
 
 export let createUser = (req, res) => {
     let username = req.body.username;
@@ -49,4 +49,4 @@ export let createUser = (req, res) => {
             });
         }
     });
-}
+};

@@ -5,14 +5,29 @@ const salt = bcrypt.genSaltSync(10);
 
 export let getUser = (req, res) => {
     let username = req.body.username;
-    let pw = bcrypt.hashSync(req.body.password, salt);
-
-    User.findOne({username: username, password: pw}, (err, user) => {
+    let pw = req.body.password;
+    User.findOne({username: username}, (err, user) => {
         if (err) {
             console.log(`Error retrieving user: ${err}`);
             return;
+        } else if(!user) {
+            let err = new Error('user not found');
+            err.status = 401;
+            return res.json(err);
         }
-        return res.json(user);
+        bcrypt.compare(pw, user.password, (err, result) => {
+            if (result === true) {
+                let data = {
+                    'username': user.username,
+                    'status': 200
+                };
+                return res.json(data);
+            } else {
+                let err = new Error('incorrect password');
+                err.status = 400;
+                return res.json(err);
+            }
+        })
     });
 };
 

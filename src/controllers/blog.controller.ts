@@ -23,7 +23,10 @@ export let addEntry = (req,res) => {
             console.log(`Error saving to db: ${err}`);
             return
         }
-        res.send('successfully saved to db');
+        res.json({
+            'message': 'successfully saved to database',
+            'status': '200'
+        });
     });
 }
 

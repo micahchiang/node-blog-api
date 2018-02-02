@@ -1,7 +1,7 @@
 import BlogModel from '../models/blog.model'
 
-export let getEntries = (req,res) => {
-    BlogModel.find({}, (err, entries) => {
+export let getEntries = (req, res) => {
+    BlogModel.find({}).sort({_id: -1}).exec((err, entries) => {
         if (err) {
             console.log(`Error retrieving entries: ${err}`);
             return;
@@ -10,7 +10,7 @@ export let getEntries = (req,res) => {
     });
 }
 
-export let addEntry = (req,res) => {
+export let addEntry = (req, res) => {
 
     const entry = new BlogModel({
         date: req.body.date,

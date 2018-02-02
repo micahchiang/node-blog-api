@@ -5,7 +5,7 @@ require('./models/user.model');
 
 // let mongoose = mongoose;
 
-let mongoDB = 'mongodb://localhost:27017/blog';
+let mongoDB = process.env.MONGO_URI;
 
 (<any>mongoose).Promise = bluebird;
 mongoose.connect(mongoDB).then(

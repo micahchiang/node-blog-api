@@ -6,8 +6,8 @@ import * as logger from 'morgan';
 
 class App {
 
-    public express;
-    public routes;
+    public express: express;
+    public routes: express.Router;
 
     constructor() {
         this.express = express();

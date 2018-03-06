@@ -8,7 +8,6 @@ export let getUser = (req, res) => {
     let pw = req.body.password;
     User.findOne({username: username}, (err, user) => {
         if (err) {
-            console.log(`Error retrieving user: ${err}`);
             return;
         } else if(!user) {
             let err = new Error('user not found');
@@ -37,14 +36,12 @@ export let createUser = (req, res) => {
 
     User.findOne({username: username}, (err, user) => {
         if (err) {
-            console.log(`Error retrieving user: ${err}`);
             res.json({
                 'err': 'an error occurred',
                 'message': err
             });
             return;
         } else if (user) {
-            console.log(`User exists: ${user}`);
             res.json({
                 'err': 'user exists'
             });
@@ -53,7 +50,6 @@ export let createUser = (req, res) => {
             let user = new User({username: username, password: pw});
             user.save((err) => {
                 if (err) {
-                    console.log(`Error saving user ${err}`);
                     res.json({err: err});
                 } else {
                     res.json({

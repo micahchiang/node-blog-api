@@ -3,10 +3,9 @@ import BlogModel from '../models/blog.model'
 export let getEntries = (req, res) => {
     BlogModel.find({}).sort({_id: -1}).exec((err, entries) => {
         if (err) {
-            console.log(`Error retrieving entries: ${err}`);
-            return;
+            return res.json(err);
         }
-        res.json(entries);
+       return res.json(entries);
     });
 }
 
@@ -20,10 +19,9 @@ export let addEntry = (req, res) => {
 
     entry.save((err) => {
         if (err) {
-            console.log(`Error saving to db: ${err}`);
-            return
+            return res.json(err);
         }
-        res.json({
+        return res.json({
             'message': 'successfully saved to database',
             'status': '200'
         });

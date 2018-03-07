@@ -10,7 +10,6 @@ export let getEntries = (req, res) => {
 }
 
 export let addEntry = (req, res) => {
-
     const entry = new BlogModel({
         date: req.body.date,
         title: req.body.title,
@@ -23,7 +22,7 @@ export let addEntry = (req, res) => {
         }
         return res.json({
             'message': 'successfully saved to database',
-            'status': '200'
+            'status': '201'
         });
     });
 }

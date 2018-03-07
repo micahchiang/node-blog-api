@@ -7,7 +7,7 @@ let router = express.Router();
 router.get('/entries', blog.getEntries);
 
 // create
-router.post('/create', blog.addEntry);
+router.post('/entries', blog.addEntry);
 
 export = router;
 

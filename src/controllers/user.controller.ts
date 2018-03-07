@@ -11,7 +11,7 @@ export let getUser = (req, res) => {
             return;
         } else if(!user) {
             let err = new Error('user not found');
-            err.status = 401;
+            err.status = 404;
             return res.json(err);
         }
         bcrypt.compare(pw, user.password, (err, result) => {
@@ -23,7 +23,7 @@ export let getUser = (req, res) => {
                 return res.json(data);
             } else {
                 let err = new Error('incorrect password');
-                err.status = 400;
+                err.status = 401;
                 return res.json(err);
             }
         })
@@ -54,7 +54,7 @@ export let createUser = (req, res) => {
                 } else {
                     res.json({
                         'message': 'user successfully created',
-                        'status': '200'
+                        'status': '201'
                     });
                 }
             });

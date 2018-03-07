@@ -8,7 +8,10 @@ export let getUser = (req, res) => {
     let pw = req.body.password;
     User.findOne({username: username}, (err, user) => {
         if (err) {
-            return;
+            res.json({
+                'err': 'an error occurred',
+                'message': err
+            });
         } else if(!user) {
             let err = new Error('user not found');
             err.status = 404;
@@ -43,7 +46,8 @@ export let createUser = (req, res) => {
             return;
         } else if (user) {
             res.json({
-                'err': 'user exists'
+                'err': 'user exists',
+                'status': 409
             });
             return;
         } else {
@@ -54,7 +58,7 @@ export let createUser = (req, res) => {
                 } else {
                     res.json({
                         'message': 'user successfully created',
-                        'status': '201'
+                        'status': 201
                     });
                 }
             });

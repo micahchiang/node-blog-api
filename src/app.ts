@@ -4,7 +4,7 @@ import * as router from './routes/routes-manager';
 import * as bodyparser from 'body-parser';
 import * as logger from 'morgan';
 
-class App {
+export default class App {
 
     public express;
     public routes;
@@ -28,6 +28,5 @@ class App {
     }
 }
 
-export default new App().express;
 
 

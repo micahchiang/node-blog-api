@@ -7,7 +7,7 @@ export let getEntries = (req, res) => {
         }
        return res.json(entries);
     });
-}
+};
 
 export let addEntry = (req, res) => {
     const entry = new BlogModel({
@@ -22,8 +22,8 @@ export let addEntry = (req, res) => {
         }
         return res.json({
             'message': 'successfully saved to database',
-            'status': '201'
+            'status': 201
         });
     });
-}
+};
 

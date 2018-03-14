@@ -1,5 +1,6 @@
 import App from './src/app';
-require('./src/mongoose.config');
+require('./src/config/mongoose.config');
+require('./src/config/passport.config');
 
 const port = process.env.SERVER_PORT || 3000;
 

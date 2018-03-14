@@ -3,6 +3,7 @@ import * as cors from 'cors';
 import * as router from './routes/routes-manager';
 import * as bodyparser from 'body-parser';
 import * as logger from 'morgan';
+import * as passport from 'passport';
 
 export default class App {
 
@@ -21,6 +22,7 @@ export default class App {
     }
 
     private loadMiddleware() {
+        this.express.use(passport.initialize());
         this.express.use(cors());
         this.express.use(bodyparser.json());
         this.express.use(bodyparser.urlencoded({extended: true}));

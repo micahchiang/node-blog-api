@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose';
 import * as bluebird from 'bluebird';
-require('./models/blog.model');
-require('./models/user.model');
+require('../models/blog.model');
+require('../models/user.model');
 
 // let mongoose = mongoose;
 

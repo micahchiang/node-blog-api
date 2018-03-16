@@ -2,53 +2,30 @@ import * as bcrypt from 'bcrypt';
 import User from '../models/user.model';
 import * as passport from 'passport';
 import { Request, Response, NextFunction} from 'express';
-import { IVerifyOptions } from 'passport-local';
 
 const salt = bcrypt.genSaltSync(10);
 
 export let getUser = (req: Request, res: Response, next: NextFunction) => {
-    passport.authenticate('local', (err: Error, user: any, info: IVerifyOptions) => {
-        if (err) return next(err);
-        if (!user) {
-            let err = new Error('user not found');
+    passport.authenticate('local',{session: false}, (err:Error, user:any) => {
+        if (err) {
             return res.json(err);
         }
-       req.logIn(user, (err) => {
-           if (err) return next(err);
-           let data  = {
-               'username': user.username,
-               'status': 200
-           };
-           res.json(data);
-       })
+        if (!user) {
+            return res.json({
+                status: 404,
+                msg: 'user does not exist'
+            });
+        }
+        req.logIn(user,(err) => {
+            if (err) {
+                return next(err);
+            }
+            return res.json({
+                status: 200,
+                msg: 'login success'
+            });
+        })
     })(req,res,next);
-    // let username = req.body.username;
-    // let pw = req.body.password;
-    // User.findOne({username: username}, (err, user) => {
-    //     if (err) {
-    //         res.json({
-    //             'err': 'an error occurred',
-    //             'message': err
-    //         });
-    //     } else if(!user) {
-    //         let err = new Error('user not found');
-    //         err.status = 404;
-    //         return res.json(err);
-    //     }
-    //     bcrypt.compare(pw, user.password, (err, result) => {
-    //         if (result === true) {
-    //             let data = {
-    //                 'username': user.username,
-    //                 'status': 200
-    //             };
-    //             return res.json(data);
-    //         } else {
-    //             let err = new Error('incorrect password');
-    //             err.status = 401;
-    //             return res.json(err);
-    //         }
-    //     })
-    // });
 };
 
 export let createUser = (req, res) => {

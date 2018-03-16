@@ -21,14 +21,18 @@ passport.use(new LocalStrategy((username, password, done) => {
         if(err) return done(err);
         if(!user) {
             return done(undefined, false, {message: `username ${username} not found`});
+        } else {
+            bcrypt.compare(password, user.password, (err, result) => {
+                if (err) {
+                    return done(err);
+                }
+                if(result === true) {
+                    return done(undefined, user);
+                } else {
+                    return done(undefined, false, {message: `incorrect username or password`});
+                }
+            });
         }
-        bcrypt.compare(password, user.password, (err, result) => {
-            if(result === true) {
-                return done(undefined, user);
-            }
-           return done(undefined, {message: `incorrect username or password`});
-        });
-        return done(undefined, user);
     })
 }));
 

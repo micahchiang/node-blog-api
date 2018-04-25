@@ -10,6 +10,4 @@ COPY . .
 
 EXPOSE 3000
 
-COPY setenvvars.sh /
-RUN chmod +x /setenvvars.sh
-ENTRYPOINT ["/setenvvars.sh"]
+CMD ["npm", "start"]

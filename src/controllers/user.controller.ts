@@ -31,7 +31,6 @@ export let getUser = (req: Request, res: Response, next: NextFunction) => {
 export let createUser = (req, res) => {
     let username = req.body.username;
     let pw = bcrypt.hashSync(req.body.password, salt);
-
     User.findOne({username: username}, (err, user) => {
         if (err) {
             res.json({

@@ -1,29 +1,27 @@
 import * as bcrypt from 'bcrypt';
 import User from '../models/user.model';
 import * as passport from 'passport';
+import * as jwt from 'jsonwebtoken';
 import { Request, Response, NextFunction} from 'express';
 
 const salt = bcrypt.genSaltSync(10);
 
 export let getUser = (req: Request, res: Response, next: NextFunction) => {
     passport.authenticate('local',{session: false}, (err:Error, user:any) => {
-        if (err) {
-            return res.json(err);
-        }
-        if (!user) {
-            return res.json({
-                status: 404,
-                msg: 'user does not exist'
+        if(err || !user) {
+            return res.status(400).json({
+                message: 'login error occurred',
+                body: user
             });
         }
-        req.logIn(user,(err) => {
+        req.logIn(user, {session: false}, (err) => {
             if (err) {
-                return next(err);
+                res.send(err);
             }
-            return res.json({
-                status: 200,
-                msg: 'login success'
+            const token = jwt.sign(user.toJSON(), process.env.JWT_SECRET, {
+                expiresIn: 604800
             });
+            return res.json({user, token});
         })
     })(req,res,next);
 };

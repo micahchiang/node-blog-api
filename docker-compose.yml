@@ -15,5 +15,6 @@ services:
       - "3000:3000"
     environment:
       - "MONGO_URI=mongodb://mongo/blog"
+      - "JWT_SECRET=abcdefghi0987654321"
     links:
       - mongo
